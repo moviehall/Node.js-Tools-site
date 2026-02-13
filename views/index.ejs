@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Media Studio</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">AI Media Studio</div>
+  <div class="url">nocostai.vercel.app</div>
+  <input type="text" placeholder="Search tools... e.g. 'upscaler', 'video'" class="search">
+</header>
+
+<div class="categories">
+  <button class="pill active">All Tools</button>
+  <button class="pill">Generate</button>
+  <button class="pill">Enhance</button>
+  <button class="pill">Video</button>
+  <button class="pill">Audio</button>
+  <button class="pill">Security</button>
+  <button class="pill">NSFW</button>
+</div>
+
+<div class="tool-list">
+  <% tools.forEach(tool => { %>
+    <div class="tool-card">
+      <div>
+        <h3><%= tool.title %></h3>
+        <p>Professional AI-powered <%= tool.title %> tool.</p>
+      </div>
+      <a href="/tool/<%= tool.slug %>" class="action-btn">
+        Generate
+      </a>
+    </div>
+  <% }) %>
+</div>
+
+</body>
+</html>
