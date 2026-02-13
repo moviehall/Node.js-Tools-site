@@ -12,30 +12,36 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const POST_DIR = path.join(__dirname, "post");
 
-/* GET ALL TOOLS */
+/* HOME PAGE */
 app.get("/", (req, res) => {
-  const files = fs.readdirSync(POST_DIR);
-
-  const tools = files
-    .filter(file => file.endsWith(".html"))
-    .map(file => {
-      const name = file.replace(".html", "");
-      return {
-        slug: name,
-        title: name.replace(/-/g, " ").toUpperCase()
-      };
-    });
-
-  res.render("index", { tools });
+  res.render("index");
 });
 
-/* SINGLE TOOL PAGE */
+/* API - GET ALL TOOLS */
+app.get("/api/tools", (req, res) => {
+  try {
+    const files = fs.readdirSync(POST_DIR);
+
+    const tools = files
+      .filter(file => file.endsWith(".html"))
+      .map(file => ({
+        slug: file.replace(".html", ""),
+        title: file.replace(".html", "").replace(/-/g, " ")
+      }));
+
+    res.json(tools);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to load tools" });
+  }
+});
+
+/* TOOL PAGE */
 app.get("/tool/:slug", (req, res) => {
   const slug = req.params.slug;
   const filePath = path.join(POST_DIR, `${slug}.html`);
 
   if (!fs.existsSync(filePath)) {
-    return res.send("Tool not found");
+    return res.status(404).send("Tool not found");
   }
 
   const content = fs.readFileSync(filePath, "utf-8");
