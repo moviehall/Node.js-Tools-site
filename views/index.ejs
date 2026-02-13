@@ -29,6 +29,8 @@
 
 <!-- FEATURED SECTION -->
 <% const featuredTools = tools.filter(t => t.featured); %>
+<% const normalTools = tools.filter(t => !t.featured); %>
+
 <% if (featuredTools.length > 0) { %>
 
   <h2 class="section-title">🔥 Featured</h2>
@@ -57,11 +59,11 @@
 
 <% } %>
 
-<!-- ALL TOOLS -->
+<!-- ALL NON-FEATURED TOOLS -->
 <h2 class="section-title">All Tools</h2>
 
 <div class="tool-list">
-  <% tools.forEach(tool => { %>
+  <% normalTools.forEach(tool => { %>
     <div class="tool-card"
       data-title="<%= tool.title.toLowerCase() %>"
       data-category="<%= tool.category %>"
