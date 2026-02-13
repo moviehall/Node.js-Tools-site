@@ -73,6 +73,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  border-color: #39ff14;
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
 }
 
 .action-btn {
