@@ -11,7 +11,10 @@
 
 <header class="header">
   <a href="/" class="logo">AI Media Studio</a>
-  <button class="icon-btn" onclick="window.location.href='/'">🔍</button>
+  <div class="header-actions">
+    <button class="icon-btn" onclick="window.location.href='/'">🔍</button>
+    <button id="settings-toggle" class="icon-btn">⚙️</button>
+  </div>
 </header>
 
 <div class="inner-tool">
@@ -21,5 +24,25 @@
   </div>
 </div>
 
+<!-- SETTINGS OVERLAY -->
+<div id="settings-overlay" class="settings-overlay">
+  <div class="settings-content">
+
+    <div class="settings-header">
+      <h2>Settings</h2>
+      <button id="close-settings" class="icon-btn">✖</button>
+    </div>
+
+    <div class="settings-section">
+      <label class="toggle-row">
+        <span>Dark Mode</span>
+        <input type="checkbox" id="dark-mode-toggle">
+      </label>
+    </div>
+
+  </div>
+</div>
+
+<script src="/script.js"></script>
 </body>
 </html>
