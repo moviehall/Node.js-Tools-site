@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #0f1115;
-  color: #fff;
+  color: #ffffff;
 }
 
 /* HEADER */
@@ -17,24 +17,24 @@ body {
 .logo {
   font-size: 24px;
   font-weight: bold;
-  color: #39ff14; /* Neon green */
+  color: #39ff14;
 }
 
 .url {
-  color: #888;
   font-size: 14px;
+  color: #888;
 }
 
 .search {
   margin-left: auto;
-  padding: 8px 12px;
+  padding: 8px 14px;
   background: #1c1f26;
   border: 1px solid #333;
   color: white;
   border-radius: 8px;
 }
 
-/* CATEGORIES */
+/* CATEGORY PILLS */
 .categories {
   display: flex;
   gap: 10px;
@@ -52,9 +52,9 @@ body {
 }
 
 .pill.active {
-  background: transparent;
   border: 1px solid #39ff14;
   color: #39ff14;
+  background: transparent;
 }
 
 /* TOOL CARDS */
@@ -86,4 +86,10 @@ body {
 /* INNER PAGE */
 .inner-tool {
   padding: 30px;
+}
+
+.back-btn {
+  margin-left: auto;
+  color: #39ff14;
+  text-decoration: none;
 }
