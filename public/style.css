@@ -93,3 +93,16 @@ body {
   color: #39ff14;
   text-decoration: none;
 }
+
+.section-title {
+  padding: 20px;
+  font-size: 22px;
+}
+
+.badge.trending {
+  background: #ff007f;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-left: 10px;
+}
