@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const POST_DIR = path.join(__dirname, "post");
 
-/* -------- Parse Front Matter -------- */
+/* Parse Front Matter */
 function parseToolFile(filePath) {
   const raw = fs.readFileSync(filePath, "utf-8");
   const parts = raw.split("---");
@@ -25,7 +25,7 @@ function parseToolFile(filePath) {
   return { metadata, content };
 }
 
-/* -------- HOME -------- */
+/* HOME */
 app.get("/", (req, res) => {
   const files = fs.readdirSync(POST_DIR);
 
@@ -36,28 +36,19 @@ app.get("/", (req, res) => {
       const parsed = parseToolFile(path.join(POST_DIR, file));
       if (!parsed) return null;
 
-      return {
-        slug,
-        ...parsed.metadata
-      };
+      return { slug, ...parsed.metadata };
     })
-    .filter(Boolean);
+    .filter(Boolean)
+    .sort((a, b) => (a.sortOrder || 999) - (b.sortOrder || 999));
 
-  /* Sorting */
-  tools.sort((a, b) => (a.sortOrder || 999) - (b.sortOrder || 999));
-
-  /* Auto categories */
-  const categories = [
-    ...new Set(tools.map(t => t.category))
-  ];
+  const categories = [...new Set(tools.map(t => t.category))];
 
   res.render("index", { tools, categories });
 });
 
-/* -------- TOOL PAGE -------- */
+/* TOOL PAGE */
 app.get("/tool/:slug", (req, res) => {
   const filePath = path.join(POST_DIR, `${req.params.slug}.html`);
-
   if (!fs.existsSync(filePath)) {
     return res.status(404).send("Tool not found");
   }
@@ -68,6 +59,11 @@ app.get("/tool/:slug", (req, res) => {
     title: parsed.metadata.title,
     content: parsed.content
   });
+});
+
+/* SETTINGS PAGE */
+app.get("/settings", (req, res) => {
+  res.render("settings");
 });
 
 app.listen(3000, () =>
