@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f1115">
   <title>AI Media Studio</title>
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -13,7 +14,7 @@
   <input id="search-input" class="search" placeholder="Search tools...">
 </header>
 
-<!-- Auto Categories -->
+<!-- CATEGORY BUTTONS -->
 <div class="categories">
   <button class="pill active">All Tools</button>
   <% categories.forEach(cat => { %>
@@ -21,7 +22,7 @@
   <% }) %>
 </div>
 
-<!-- Featured Section -->
+<!-- FEATURED -->
 <% const featuredTools = tools.filter(t => t.featured); %>
 <% if (featuredTools.length > 0) { %>
   <h2 class="section-title">🔥 Featured</h2>
@@ -29,8 +30,11 @@
     <% featuredTools.forEach(tool => { %>
       <div class="tool-card"
         data-title="<%= tool.title.toLowerCase() %>"
-        data-category="<%= tool.category %>">
-
+        data-category="<%= tool.category %>"
+        data-url="/tool/<%= tool.slug %>"
+        tabindex="0"
+        role="button"
+      >
         <div>
           <h3>
             <%= tool.icon %> <%= tool.title %>
@@ -40,10 +44,6 @@
           </h3>
           <p><%= tool.description %></p>
         </div>
-
-        <a href="/tool/<%= tool.slug %>" class="action-btn">
-          Open
-        </a>
       </div>
     <% }) %>
   </div>
@@ -55,9 +55,11 @@
   <% tools.forEach(tool => { %>
     <div class="tool-card"
       data-title="<%= tool.title.toLowerCase() %>"
-      data-category="<%= tool.category %>">
+      data-category="<%= tool.category %>"
       data-url="/tool/<%= tool.slug %>"
-
+      tabindex="0"
+      role="button"
+    >
       <div>
         <h3>
           <%= tool.icon %> <%= tool.title %>
@@ -67,10 +69,6 @@
         </h3>
         <p><%= tool.description %></p>
       </div>
-
-      <a href="/tool/<%= tool.slug %>" class="action-btn">
-        Open
-      </a>
     </div>
   <% }) %>
 </div>
