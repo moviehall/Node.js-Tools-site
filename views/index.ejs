@@ -8,39 +8,65 @@
 
 <header class="header">
   <div class="logo">AI Media Studio</div>
-  <div class="url">nocostai.vercel.app</div>
-
-  <input 
-    type="text"
-    id="search-input"
-    placeholder="Search tools... e.g. 'upscaler', 'video'"
-    class="search"
-  >
+  <input id="search-input" class="search" placeholder="Search tools...">
 </header>
 
+<!-- Auto Categories -->
 <div class="categories">
   <button class="pill active">All Tools</button>
-  <button class="pill">Generate</button>
-  <button class="pill">Enhance</button>
-  <button class="pill">Video</button>
-  <button class="pill">Audio</button>
-  <button class="pill">Security</button>
-  <button class="pill">NSFW</button>
+  <% categories.forEach(cat => { %>
+    <button class="pill"><%= cat %></button>
+  <% }) %>
 </div>
+
+<!-- Featured Section -->
+<% const featuredTools = tools.filter(t => t.featured); %>
+<% if (featuredTools.length > 0) { %>
+  <h2 class="section-title">🔥 Featured</h2>
+  <div class="tool-list">
+    <% featuredTools.forEach(tool => { %>
+      <div class="tool-card"
+        data-title="<%= tool.title.toLowerCase() %>"
+        data-category="<%= tool.category %>">
+
+        <div>
+          <h3>
+            <%= tool.icon %> <%= tool.title %>
+            <% if (tool.trending) { %>
+              <span class="badge">Trending</span>
+            <% } %>
+          </h3>
+          <p><%= tool.description %></p>
+        </div>
+
+        <a href="/tool/<%= tool.slug %>" class="action-btn">
+          Open
+        </a>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<h2 class="section-title">All Tools</h2>
 
 <div class="tool-list">
   <% tools.forEach(tool => { %>
-    <div 
-      class="tool-card"
+    <div class="tool-card"
       data-title="<%= tool.title.toLowerCase() %>"
-    >
+      data-category="<%= tool.category %>">
+
       <div>
-        <h3><%= tool.title %></h3>
-        <p>Professional AI-powered <%= tool.title %> tool.</p>
+        <h3>
+          <%= tool.icon %> <%= tool.title %>
+          <% if (tool.trending) { %>
+            <span class="badge">Trending</span>
+          <% } %>
+        </h3>
+        <p><%= tool.description %></p>
       </div>
 
       <a href="/tool/<%= tool.slug %>" class="action-btn">
-        Generate
+        Open
       </a>
     </div>
   <% }) %>
