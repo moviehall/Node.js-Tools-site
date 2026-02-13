@@ -5,6 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let activeCategory = "All Tools";
 
+  /* CARD CLICK NAVIGATION */
+  cards.forEach(card => {
+    card.addEventListener("click", function () {
+      const url = this.dataset.url;
+      window.location.href = url;
+    });
+  });
+
   function filter() {
     const term = searchInput.value.toLowerCase();
 
