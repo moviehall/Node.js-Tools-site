@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+  /* SEARCH TOGGLE */
   const searchToggle = document.getElementById("search-toggle");
   const searchContainer = document.getElementById("search-container");
   const searchInput = document.getElementById("search-input");
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  /* CATEGORY FILTER */
+  /* CATEGORY + SEARCH FILTER */
   const categoryButtons = document.querySelectorAll(".pill");
   let activeCategory = "All Tools";
 
@@ -62,31 +63,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  /* SETTINGS */
-  const settingsToggle = document.getElementById("settings-toggle");
-  const settingsOverlay = document.getElementById("settings-overlay");
-  const closeSettings = document.getElementById("close-settings");
+  /* DARK MODE */
   const darkModeToggle = document.getElementById("dark-mode-toggle");
-
-  if (settingsToggle) {
-    settingsToggle.addEventListener("click", () => {
-      settingsOverlay.classList.add("active");
-    });
-  }
-
-  if (closeSettings) {
-    closeSettings.addEventListener("click", () => {
-      settingsOverlay.classList.remove("active");
-    });
-  }
 
   function applyTheme(mode) {
     if (mode === "light") {
       document.body.classList.add("light-mode");
-      darkModeToggle.checked = false;
+      if (darkModeToggle) darkModeToggle.checked = false;
     } else {
       document.body.classList.remove("light-mode");
-      darkModeToggle.checked = true;
+      if (darkModeToggle) darkModeToggle.checked = true;
     }
   }
 
