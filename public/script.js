@@ -4,38 +4,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchContainer = document.getElementById("search-container");
   const searchInput = document.getElementById("search-input");
 
-  /* Toggle Search */
   if (searchToggle && searchContainer) {
     searchToggle.addEventListener("click", function () {
       searchContainer.classList.toggle("active");
-
       if (searchContainer.classList.contains("active")) {
         searchInput.focus();
       }
     });
   }
 
-  /* Card click navigation */
+  /* CARD CLICK */
   const cards = document.querySelectorAll(".tool-card");
   cards.forEach(card => {
-    card.addEventListener("click", function () {
-      window.location.href = this.dataset.url;
+    card.addEventListener("click", () => {
+      window.location.href = card.dataset.url;
     });
 
-    card.addEventListener("keypress", function (e) {
+    card.addEventListener("keypress", e => {
       if (e.key === "Enter") {
-        window.location.href = this.dataset.url;
+        window.location.href = card.dataset.url;
       }
     });
   });
 
-  /* Filtering */
+  /* CATEGORY FILTER */
   const categoryButtons = document.querySelectorAll(".pill");
   let activeCategory = "All Tools";
 
   function filter() {
     if (!searchInput) return;
-
     const term = searchInput.value.toLowerCase();
 
     cards.forEach(card => {
@@ -64,5 +61,48 @@ document.addEventListener("DOMContentLoaded", function () {
       filter();
     });
   });
+
+  /* SETTINGS */
+  const settingsToggle = document.getElementById("settings-toggle");
+  const settingsOverlay = document.getElementById("settings-overlay");
+  const closeSettings = document.getElementById("close-settings");
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+  if (settingsToggle) {
+    settingsToggle.addEventListener("click", () => {
+      settingsOverlay.classList.add("active");
+    });
+  }
+
+  if (closeSettings) {
+    closeSettings.addEventListener("click", () => {
+      settingsOverlay.classList.remove("active");
+    });
+  }
+
+  function applyTheme(mode) {
+    if (mode === "light") {
+      document.body.classList.add("light-mode");
+      darkModeToggle.checked = false;
+    } else {
+      document.body.classList.remove("light-mode");
+      darkModeToggle.checked = true;
+    }
+  }
+
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  applyTheme(savedTheme);
+
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("change", () => {
+      if (darkModeToggle.checked) {
+        localStorage.setItem("theme", "dark");
+        applyTheme("dark");
+      } else {
+        localStorage.setItem("theme", "light");
+        applyTheme("light");
+      }
+    });
+  }
 
 });
