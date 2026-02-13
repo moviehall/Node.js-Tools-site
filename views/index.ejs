@@ -11,15 +11,10 @@
 
 <header class="header">
   <a href="/" class="logo">AI Media Studio</a>
-  <button id="search-toggle" class="icon-btn">🔍</button>
+  <input id="search-input" class="search" placeholder="Search tools...">
 </header>
 
-<!-- Search (hidden by default) -->
-<div id="search-container" class="search-container">
-  <input id="search-input" class="search-box" placeholder="Search tools... e.g. upscaler">
-</div>
-
-<!-- Categories -->
+<!-- CATEGORY BUTTONS -->
 <div class="categories">
   <button class="pill active">All Tools</button>
   <% categories.forEach(cat => { %>
@@ -27,7 +22,35 @@
   <% }) %>
 </div>
 
-<!-- Tool List -->
+<!-- FEATURED -->
+<% const featuredTools = tools.filter(t => t.featured); %>
+<% if (featuredTools.length > 0) { %>
+  <h2 class="section-title">🔥 Featured</h2>
+  <div class="tool-list">
+    <% featuredTools.forEach(tool => { %>
+      <div class="tool-card"
+        data-title="<%= tool.title.toLowerCase() %>"
+        data-category="<%= tool.category %>"
+        data-url="/tool/<%= tool.slug %>"
+        tabindex="0"
+        role="button"
+      >
+        <div>
+          <h3>
+            <%= tool.icon %> <%= tool.title %>
+            <% if (tool.trending) { %>
+              <span class="badge">Trending</span>
+            <% } %>
+          </h3>
+          <p><%= tool.description %></p>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<h2 class="section-title">All Tools</h2>
+
 <div class="tool-list">
   <% tools.forEach(tool => { %>
     <div class="tool-card"
