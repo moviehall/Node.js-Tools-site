@@ -11,15 +11,18 @@
 
 <header class="header">
   <a href="/" class="logo">AI Media Studio</a>
-  <button id="search-toggle" class="icon-btn">🔍</button>
+  <div class="header-actions">
+    <button id="search-toggle" class="icon-btn">🔍</button>
+    <button id="settings-toggle" class="icon-btn">⚙️</button>
+  </div>
 </header>
 
-<!-- Search (Hidden by default) -->
+<!-- SEARCH -->
 <div id="search-container" class="search-container">
   <input id="search-input" class="search-box" placeholder="Search tools...">
 </div>
 
-<!-- CATEGORY BUTTONS -->
+<!-- CATEGORIES -->
 <div class="categories">
   <button class="pill active">All Tools</button>
   <% categories.forEach(cat => { %>
@@ -30,42 +33,36 @@
 <% const featuredTools = tools.filter(t => t.featured); %>
 <% const normalTools = tools.filter(t => !t.featured); %>
 
-<!-- FEATURED SECTION -->
+<!-- FEATURED -->
 <% if (featuredTools.length > 0) { %>
-
-  <h2 class="section-title">🔥 Featured</h2>
-
-  <div class="tool-list">
-    <% featuredTools.forEach(tool => { %>
-      <div class="tool-card"
-        data-title="<%= tool.title.toLowerCase() %>"
-        data-category="<%= tool.category %>"
-        data-url="/tool/<%= tool.slug %>"
-        tabindex="0"
-        role="button"
-      >
-        <div>
-          <h3>
-            <%= tool.icon %> <%= tool.title %>
-
-            <% if (tool.badge) { %>
-              <span class="badge <%= tool.badge.toLowerCase() %>">
-                <%= tool.badge %>
-              </span>
-            <% } %>
-
-          </h3>
-          <p><%= tool.description %></p>
-        </div>
+<h2 class="section-title">🔥 Featured</h2>
+<div class="tool-list">
+  <% featuredTools.forEach(tool => { %>
+    <div class="tool-card"
+      data-title="<%= tool.title.toLowerCase() %>"
+      data-category="<%= tool.category %>"
+      data-url="/tool/<%= tool.slug %>"
+      tabindex="0"
+      role="button"
+    >
+      <div>
+        <h3>
+          <%= tool.icon %> <%= tool.title %>
+          <% if (tool.badge) { %>
+            <span class="badge <%= tool.badge.toLowerCase() %>">
+              <%= tool.badge %>
+            </span>
+          <% } %>
+        </h3>
+        <p><%= tool.description %></p>
       </div>
-    <% }) %>
-  </div>
-
+    </div>
+  <% }) %>
+</div>
 <% } %>
 
-<!-- ALL NON-FEATURED TOOLS -->
+<!-- ALL TOOLS -->
 <h2 class="section-title">All Tools</h2>
-
 <div class="tool-list">
   <% normalTools.forEach(tool => { %>
     <div class="tool-card"
@@ -78,18 +75,35 @@
       <div>
         <h3>
           <%= tool.icon %> <%= tool.title %>
-
           <% if (tool.badge) { %>
             <span class="badge <%= tool.badge.toLowerCase() %>">
               <%= tool.badge %>
             </span>
           <% } %>
-
         </h3>
         <p><%= tool.description %></p>
       </div>
     </div>
   <% }) %>
+</div>
+
+<!-- SETTINGS OVERLAY -->
+<div id="settings-overlay" class="settings-overlay">
+  <div class="settings-content">
+
+    <div class="settings-header">
+      <h2>Settings</h2>
+      <button id="close-settings" class="icon-btn">✖</button>
+    </div>
+
+    <div class="settings-section">
+      <label class="toggle-row">
+        <span>Dark Mode</span>
+        <input type="checkbox" id="dark-mode-toggle">
+      </label>
+    </div>
+
+  </div>
 </div>
 
 <script src="/script.js"></script>
