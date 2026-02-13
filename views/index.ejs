@@ -3,26 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f1115">
   <title>AI Media Studio</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-<header class="header">
-  <a href="/" class="logo">AI Media Studio</a>
-  <div class="header-actions">
-    <button id="search-toggle" class="icon-btn">🔍</button>
-    <button id="settings-toggle" class="icon-btn">⚙️</button>
-  </div>
-</header>
+<%- include('header', { showSearch: true, activePage: 'home' }) %>
 
-<!-- SEARCH -->
 <div id="search-container" class="search-container">
   <input id="search-input" class="search-box" placeholder="Search tools...">
 </div>
 
-<!-- CATEGORIES -->
 <div class="categories">
   <button class="pill active">All Tools</button>
   <% categories.forEach(cat => { %>
@@ -33,7 +24,6 @@
 <% const featuredTools = tools.filter(t => t.featured); %>
 <% const normalTools = tools.filter(t => !t.featured); %>
 
-<!-- FEATURED -->
 <% if (featuredTools.length > 0) { %>
 <h2 class="section-title">🔥 Featured</h2>
 <div class="tool-list">
@@ -61,7 +51,6 @@
 </div>
 <% } %>
 
-<!-- ALL TOOLS -->
 <h2 class="section-title">All Tools</h2>
 <div class="tool-list">
   <% normalTools.forEach(tool => { %>
@@ -85,25 +74,6 @@
       </div>
     </div>
   <% }) %>
-</div>
-
-<!-- SETTINGS OVERLAY -->
-<div id="settings-overlay" class="settings-overlay">
-  <div class="settings-content">
-
-    <div class="settings-header">
-      <h2>Settings</h2>
-      <button id="close-settings" class="icon-btn">✖</button>
-    </div>
-
-    <div class="settings-section">
-      <label class="toggle-row">
-        <span>Dark Mode</span>
-        <input type="checkbox" id="dark-mode-toggle">
-      </label>
-    </div>
-
-  </div>
 </div>
 
 <script src="/script.js"></script>
