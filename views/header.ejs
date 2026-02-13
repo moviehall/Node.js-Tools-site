@@ -1,0 +1,18 @@
+<header class="header">
+  <a href="/" class="logo">AI Media Studio</a>
+
+  <div class="header-actions">
+
+    <% if (showSearch) { %>
+      <button id="search-toggle" class="icon-btn">🔍</button>
+    <% } else { %>
+      <button class="icon-btn" onclick="window.location.href='/'">🔍</button>
+    <% } %>
+
+    <a href="/settings"
+       class="icon-btn <%= activePage === 'settings' ? 'active-icon' : '' %>">
+      ⚙️
+    </a>
+
+  </div>
+</header>
