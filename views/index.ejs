@@ -11,8 +11,13 @@
 
 <header class="header">
   <a href="/" class="logo">AI Media Studio</a>
-  <input id="search-input" class="search" placeholder="Search tools...">
+  <button id="search-toggle" class="icon-btn">🔍</button>
 </header>
+
+<!-- Search (Hidden by default) -->
+<div id="search-container" class="search-container">
+  <input id="search-input" class="search-box" placeholder="Search tools...">
+</div>
 
 <!-- CATEGORY BUTTONS -->
 <div class="categories">
@@ -22,10 +27,14 @@
   <% }) %>
 </div>
 
-<!-- FEATURED -->
 <% const featuredTools = tools.filter(t => t.featured); %>
+<% const normalTools = tools.filter(t => !t.featured); %>
+
+<!-- FEATURED SECTION -->
 <% if (featuredTools.length > 0) { %>
+
   <h2 class="section-title">🔥 Featured</h2>
+
   <div class="tool-list">
     <% featuredTools.forEach(tool => { %>
       <div class="tool-card"
@@ -38,21 +47,27 @@
         <div>
           <h3>
             <%= tool.icon %> <%= tool.title %>
-            <% if (tool.trending) { %>
-              <span class="badge">Trending</span>
+
+            <% if (tool.badge) { %>
+              <span class="badge <%= tool.badge.toLowerCase() %>">
+                <%= tool.badge %>
+              </span>
             <% } %>
+
           </h3>
           <p><%= tool.description %></p>
         </div>
       </div>
     <% }) %>
   </div>
+
 <% } %>
 
+<!-- ALL NON-FEATURED TOOLS -->
 <h2 class="section-title">All Tools</h2>
 
 <div class="tool-list">
-  <% tools.forEach(tool => { %>
+  <% normalTools.forEach(tool => { %>
     <div class="tool-card"
       data-title="<%= tool.title.toLowerCase() %>"
       data-category="<%= tool.category %>"
@@ -63,9 +78,13 @@
       <div>
         <h3>
           <%= tool.icon %> <%= tool.title %>
-          <% if (tool.trending) { %>
-            <span class="badge">Trending</span>
+
+          <% if (tool.badge) { %>
+            <span class="badge <%= tool.badge.toLowerCase() %>">
+              <%= tool.badge %>
+            </span>
           <% } %>
+
         </h3>
         <p><%= tool.description %></p>
       </div>

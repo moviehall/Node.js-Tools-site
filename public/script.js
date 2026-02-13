@@ -1,19 +1,41 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+  const searchToggle = document.getElementById("search-toggle");
+  const searchContainer = document.getElementById("search-container");
   const searchInput = document.getElementById("search-input");
+
+  /* Toggle Search */
+  if (searchToggle && searchContainer) {
+    searchToggle.addEventListener("click", function () {
+      searchContainer.classList.toggle("active");
+
+      if (searchContainer.classList.contains("active")) {
+        searchInput.focus();
+      }
+    });
+  }
+
+  /* Card click navigation */
   const cards = document.querySelectorAll(".tool-card");
-  const categoryButtons = document.querySelectorAll(".pill");
-
-  let activeCategory = "All Tools";
-
-  /* CARD CLICK NAVIGATION */
   cards.forEach(card => {
     card.addEventListener("click", function () {
-      const url = this.dataset.url;
-      window.location.href = url;
+      window.location.href = this.dataset.url;
+    });
+
+    card.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        window.location.href = this.dataset.url;
+      }
     });
   });
 
+  /* Filtering */
+  const categoryButtons = document.querySelectorAll(".pill");
+  let activeCategory = "All Tools";
+
   function filter() {
+    if (!searchInput) return;
+
     const term = searchInput.value.toLowerCase();
 
     cards.forEach(card => {
@@ -30,7 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  searchInput.addEventListener("input", filter);
+  if (searchInput) {
+    searchInput.addEventListener("input", filter);
+  }
 
   categoryButtons.forEach(btn => {
     btn.addEventListener("click", function () {
@@ -40,4 +64,5 @@ document.addEventListener("DOMContentLoaded", function () {
       filter();
     });
   });
+
 });
