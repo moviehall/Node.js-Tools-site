@@ -3,43 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f1115">
   <title><%= title %> | AI Media Studio</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-<header class="header">
-  <a href="/" class="logo">AI Media Studio</a>
-  <div class="header-actions">
-    <button class="icon-btn" onclick="window.location.href='/'">🔍</button>
-    <button id="settings-toggle" class="icon-btn">⚙️</button>
-  </div>
-</header>
+<%- include('header', { showSearch: false, activePage: 'tool' }) %>
 
 <div class="inner-tool">
   <h2><%= title %></h2>
   <div class="tool-content">
     <%- content %>
-  </div>
-</div>
-
-<!-- SETTINGS OVERLAY -->
-<div id="settings-overlay" class="settings-overlay">
-  <div class="settings-content">
-
-    <div class="settings-header">
-      <h2>Settings</h2>
-      <button id="close-settings" class="icon-btn">✖</button>
-    </div>
-
-    <div class="settings-section">
-      <label class="toggle-row">
-        <span>Dark Mode</span>
-        <input type="checkbox" id="dark-mode-toggle">
-      </label>
-    </div>
-
   </div>
 </div>
 
