@@ -12,37 +12,64 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const POST_DIR = path.join(__dirname, "post");
 
-/* HOME PAGE */
+/* -------- Parse Front Matter -------- */
+function parseToolFile(filePath) {
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const parts = raw.split("---");
+
+  if (parts.length < 3) return null;
+
+  const metadata = JSON.parse(parts[1].trim());
+  const content = parts.slice(2).join("---").trim();
+
+  return { metadata, content };
+}
+
+/* -------- HOME -------- */
 app.get("/", (req, res) => {
   const files = fs.readdirSync(POST_DIR);
 
   const tools = files
-    .filter(file => file.endsWith(".html"))
-    .map(file => ({
-      slug: file.replace(".html", ""),
-      title: file.replace(".html", "").replace(/-/g, " ")
-    }));
+    .filter(f => f.endsWith(".html"))
+    .map(file => {
+      const slug = file.replace(".html", "");
+      const parsed = parseToolFile(path.join(POST_DIR, file));
+      if (!parsed) return null;
 
-  res.render("index", { tools });
+      return {
+        slug,
+        ...parsed.metadata
+      };
+    })
+    .filter(Boolean);
+
+  /* Sorting */
+  tools.sort((a, b) => (a.sortOrder || 999) - (b.sortOrder || 999));
+
+  /* Auto categories */
+  const categories = [
+    ...new Set(tools.map(t => t.category))
+  ];
+
+  res.render("index", { tools, categories });
 });
 
-/* TOOL PAGE */
+/* -------- TOOL PAGE -------- */
 app.get("/tool/:slug", (req, res) => {
-  const slug = req.params.slug;
-  const filePath = path.join(POST_DIR, `${slug}.html`);
+  const filePath = path.join(POST_DIR, `${req.params.slug}.html`);
 
   if (!fs.existsSync(filePath)) {
     return res.status(404).send("Tool not found");
   }
 
-  const content = fs.readFileSync(filePath, "utf-8");
+  const parsed = parseToolFile(filePath);
 
   res.render("tool", {
-    title: slug.replace(/-/g, " ").toUpperCase(),
-    content
+    title: parsed.metadata.title,
+    content: parsed.content
   });
 });
 
 app.listen(3000, () =>
-  console.log("🔥 AI Media Studio running on http://localhost:3000")
+  console.log("🔥 Running on http://localhost:3000")
 );
