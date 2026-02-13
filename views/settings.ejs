@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | AI Media Studio</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<%- include('header', { showSearch: false, activePage: 'settings' }) %>
+
+<div class="settings-page">
+  <h2 class="section-title">Settings</h2>
+
+  <div class="settings-card">
+    <div class="setting-row">
+      <span>Dark Mode</span>
+      <input type="checkbox" id="dark-mode-toggle">
+    </div>
+  </div>
+</div>
+
+<script src="/script.js"></script>
+</body>
+</html>
