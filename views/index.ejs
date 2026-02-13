@@ -9,10 +9,11 @@
 <header class="header">
   <div class="logo">AI Media Studio</div>
   <div class="url">nocostai.vercel.app</div>
+
   <input 
-    type="text" 
+    type="text"
     id="search-input"
-    placeholder="Search tools... e.g. 'upscaler', 'video'" 
+    placeholder="Search tools... e.g. 'upscaler', 'video'"
     class="search"
   >
 </header>
@@ -27,7 +28,23 @@
   <button class="pill">NSFW</button>
 </div>
 
-<div id="post-grid" class="tool-list"></div>
+<div class="tool-list">
+  <% tools.forEach(tool => { %>
+    <div 
+      class="tool-card"
+      data-title="<%= tool.title.toLowerCase() %>"
+    >
+      <div>
+        <h3><%= tool.title %></h3>
+        <p>Professional AI-powered <%= tool.title %> tool.</p>
+      </div>
+
+      <a href="/tool/<%= tool.slug %>" class="action-btn">
+        Generate
+      </a>
+    </div>
+  <% }) %>
+</div>
 
 <script src="/script.js"></script>
 </body>
