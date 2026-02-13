@@ -1,0 +1,24 @@
+{
+  "name": "ai-media-studio",
+  "version": "1.0.0",
+  "description": "Modern AI Media Tool Platform with dynamic tool loading from post folder",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "ai",
+    "media-tools",
+    "express",
+    "ejs",
+    "dark-theme"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.19.2"
+  }
+}
