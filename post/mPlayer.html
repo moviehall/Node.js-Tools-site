@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/monokai.min.css">
+    <title>mPlayer</title>
+</head>
+
+<style> 
+.accordion {
+  background-color: #fefdfb;
+  color: #2a2e43;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.4s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: #fdfdff;
+  color: #212739;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added box shadow */
+}
+</style>
+</head>
+<body>
+
+<button class="accordion"><i class="fas fa-info-circle"></i> Account Info</button>
+<div class="panel">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script> 
+
+<img style="display: none; height:100px; width:150;" class="homepage-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWPXZ945eBN3xunHdIt4eKF9toQkYQwL23bA&usqp=CAU" alt="Homepage Image">
+ 
+<script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+    
+<div class="elfsight-app-68f120e3-eeed-4ca1-9236-683f88169939" data-elfsight-app-lazy></div>
+
+</html>
