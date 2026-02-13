@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f1115;
+  color: #fff;
+}
+
+/* HEADER */
+.header {
+  background: #12141a;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #39ff14; /* Neon green */
+}
+
+.url {
+  color: #888;
+  font-size: 14px;
+}
+
+.search {
+  margin-left: auto;
+  padding: 8px 12px;
+  background: #1c1f26;
+  border: 1px solid #333;
+  color: white;
+  border-radius: 8px;
+}
+
+/* CATEGORIES */
+.categories {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.pill {
+  padding: 8px 16px;
+  background: #22252c;
+  border: none;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.pill.active {
+  background: transparent;
+  border: 1px solid #39ff14;
+  color: #39ff14;
+}
+
+/* TOOL CARDS */
+.tool-list {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tool-card {
+  background: rgba(30, 33, 40, 0.9);
+  border: 1px solid #2c2f36;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-btn {
+  background: #7c3aed;
+  padding: 10px 18px;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+/* INNER PAGE */
+.inner-tool {
+  padding: 30px;
+}
