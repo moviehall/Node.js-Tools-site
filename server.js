@@ -14,25 +14,16 @@ const POST_DIR = path.join(__dirname, "post");
 
 /* HOME PAGE */
 app.get("/", (req, res) => {
-  res.render("index");
-});
+  const files = fs.readdirSync(POST_DIR);
 
-/* API - GET ALL TOOLS */
-app.get("/api/tools", (req, res) => {
-  try {
-    const files = fs.readdirSync(POST_DIR);
+  const tools = files
+    .filter(file => file.endsWith(".html"))
+    .map(file => ({
+      slug: file.replace(".html", ""),
+      title: file.replace(".html", "").replace(/-/g, " ")
+    }));
 
-    const tools = files
-      .filter(file => file.endsWith(".html"))
-      .map(file => ({
-        slug: file.replace(".html", ""),
-        title: file.replace(".html", "").replace(/-/g, " ")
-      }));
-
-    res.json(tools);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to load tools" });
-  }
+  res.render("index", { tools });
 });
 
 /* TOOL PAGE */
