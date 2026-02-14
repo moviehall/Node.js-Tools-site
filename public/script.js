@@ -14,6 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /* SETTINGS TOGGLE */
+const settingsToggle = document.getElementById("settings-toggle");
+const settingsPanel = document.getElementById("settings-panel");
+
+if (settingsToggle && settingsPanel) {
+  settingsToggle.addEventListener("click", () => {
+    settingsPanel.classList.toggle("active");
+  });
+}
+
   /* CARD CLICK */
   const cards = document.querySelectorAll(".tool-card");
   cards.forEach(card => {
