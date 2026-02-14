@@ -61,10 +61,6 @@ app.get("/tool/:slug", (req, res) => {
   });
 });
 
-/* SETTINGS PAGE */
-app.get("/settings", (req, res) => {
-  res.render("settings");
-});
 
 app.listen(3000, () =>
   console.log("🔥 Running on http://localhost:3000")
